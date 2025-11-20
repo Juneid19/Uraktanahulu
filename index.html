@@ -124,6 +124,17 @@ h2{font-size:26px;margin-bottom:6px}
   background: rgba(150,200,255,5);
   box-shadow: 0 0 12px rgba(150,200,255,0.5);
 }
+.credit {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255,255,255,0.6);
+  z-index: 999;
+  pointer-events: none; /* supaya tidak mengganggu klik */
+}
+    
 </style></head>
 <body><div class="bg"></div><div class="player" id="playerBox">
   <h2>Muarasipongi</h2>  <div class="cover" id="cover"></div>
@@ -132,7 +143,8 @@ h2{font-size:26px;margin-bottom:6px}
       <i id="playIcon">▶</i>
   </div>  <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
 </div><audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
-
+<div class="credit">prepare by Juneid</div>
+    
 <script>
 // 100 Background Images (Unsplash placeholders, bebas diganti)
 const bgImages = [
