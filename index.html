@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>iframe tester</title>
+    <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
+
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Muarasipongi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* BACKGROUND SLIDESHOW */
+.bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slide 25s infinite;
+  z-index: -1;
+  filter: brightness(0.45);
+}
+
+@keyframes slide {
+  0%   { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
+  33%  { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); }
+  66%  { background-image: url('https://images.unsplash.com/photo-1491553895911-0055eca6402d'); }
+  100% { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
+}
+
+/* PLAYER */
+.player {
+  width: 77%;
+  max-width: 350px;
+  margin: 40px auto;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.001); /* lebih transparan */
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 0.5px solid rgba(255,255,255,0.01);
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,255,255,0.01);
+  transition: box-shadow 1s ease;
+}
+
+
+/* RADIO NAME */
+h1{font-size:26px;margin-bottom:3px}
+p{opacity:.7;font-size:12px}
+
+
+/* COVER ART */
+.cover {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  margin: 0 auto 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 20px rgba(255,255,255,0.7);
+  transition: box-shadow 1s ease;
+}
+
+#title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+#artist {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+/* PLAY BUTTON */
+.play-btn {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin: 10px auto 20px;
+  background: rgba(4,255,255,0.7);
+  border: 2px solid light blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 10px light green;
+  transition: 0.3s, box-shadow 1s ease;
+}
+.play-btn i {
+  font-size: 30px;
+}
+.play-btn:hover {
+  transform: scale(1.08);
+}
+
+/* VOLUME SLIDER – SOFT BLUE */
+.volume {
+  -webkit-appearance: none;
+  width: 90%;
+  height: 7px;
+  background: rgba(180,220,255,7);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(150,200,255,0.5);
+  cursor: pointer;
+}
+.volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(150,200,255,5);
+  box-shadow: 0 0 12px rgba(150,200,255,0.5);
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<div class="player" id="playerBox">
+  <h1>Muarasipongi</h1>
+  <p>Juneid-Radio</p>
+  
+
+  <div class="cover" id="cover"></div>
+  <div id="title">Memuat...</div>
+  <div id="artist"></div>
+
+  <div class="play-btn" id="playButton">
+      <i id="playIcon">▶</i>
+  </div>
+
+  <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
+</div>
+
+<audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
+ 
+<script>
+const id = "2vygvb37gkeuv";
+const api = `https://zenoplay.zenomedia.com/api/zenofm/nowplaying/${id}`;
+const defaultCover = "https://dpi4fupzvxbqq.cloudfront.net/rfm/uploads/blogo/300/300_1470024235.png";
+const audio       = document.getElementById("radio");
+const titleEl     = document.getElementById("title");
+const artistEl    = document.getElementById("artist");
+const coverEl     = document.getElementById("cover");
+const playBtn     = document.getElementById("playButton");
+const playIcon    = document.getElementById("playIcon");
+const volumeSlider = document.getElementById("volumeSlider");
+const playerBox    = document.getElementById("playerBox");
+/* PLAY / PAUSE */
+playBtn.onclick = () => {
+  if (audio.paused) {
+    audio.play();
+    playIcon.textContent = "❚❚";
+  } else {
+    audio.pause();
+    playIcon.textContent = "▶";
+  }
+};
+/* Volume */
+volumeSlider.oninput = () => {
+  audio.volume = volumeSlider.value / 100;
+};
+/* Extract dominant color */
+function extractColor(url, callback){
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = url;
+  img.onload = () => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img,0,0);
+    const d = ctx.getImageData(0,0,canvas.width,canvas.height).data;
+    let r=0,g=0,b=0,count=0;
+    for(let i=0;i<d.length;i+=4){
+      r+=d[i]; g+=d[i+1]; b+=d[i+2];
+      count++;
+    }
+    r=Math.floor(r/count);
+    g=Math.floor(g/count);
+    b=Math.floor(b/count);
+    callback(`rgb(${r},${g},${b})`);
+  };
+}
+/* COVER ART ITUNES */
+async function getCover(artist, title) {
+  try {
+    const q = encodeURIComponent(`${artist} ${title}`);
+    const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1`);
+    const data = await
+    res.json();
+    if (data.results.length > 0) {
+      return data.results[0].artworkUrl100.replace("100x100bb.jpg","600x600bb.jpg");
+    }
+  } catch {}
+  return defaultCover;
+}
+/* UPDATE GLOW */
+function setGlow(color){
+  playerBox.style.boxShadow = `0 0 30px 10px ${color}`;
+  coverEl.style.boxShadow   = `0 0 25px ${color}`;
+  playBtn.style.boxShadow   = `0 0 25px ${color}`;
+}
+/* UPDATE NOW PLAYING */
+async function updateSong() {
+  try {
+    const res = await fetch(api);
+    const data = await res.json();
+    const text = data.title || "Live Stream";
+    let artist = "";
+    let title  = text;
+    if (text.includes(" - ")) {
+      artist = text.split(" - ")[0].trim();
+      title  = text.split(" - ")[1].trim();
+    }
+    titleEl.textContent = title;
+    artistEl.textContent = artist;
+    const cover = await getCover(artist, title);
+    coverEl.style.backgroundImage = `url("${cover}")`;
+    extractColor(cover, (color)=> setGlow(color));
+  } catch(e) {
+    titleEl.textContent = "Radio Stream";
+    coverEl.style.backgroundImage = `url("${defaultCover}")`;
+    setGlow("light blue");
+  }
+}
+updateSong();
+setInterval(updateSong, 10000);
+</script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
