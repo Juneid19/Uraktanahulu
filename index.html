@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
+<!DOCTYPE html><html lang="en">  <head>
     <meta charset="UTF-8">
     <title>iframe tester</title>
-    <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
-
-
-  </head>
-    
-  <body>
+    <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">  </head>  <body>
   <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <title>Muarasipongi</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1"><style>
 body {
   margin: 0;
   padding: 0;
@@ -41,20 +31,26 @@ body {
 
 @keyframes slide {
   0%   { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
-  33%  { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); }
-  66%  { background-image: url('https://images.unsplash.com/photo-1491553895911-0055eca6402d'); }
-  100% { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
+  20%  { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); }
+  30%  { background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&h=1080'); }
+  40%  { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
+  50%  { background-image: url('https://images.unsplash.com/photo-1433878455169-4698e60005b1?auto=format&fit=crop&w=1920&h=1080'); }
+  60%  { background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&h=1080'); }
+  70%  { background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&h=1080'); }
+  80%  { background-image: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&h=1080'); }
+  90%  { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&h=1080'); }
+  100% { background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1920&h=1080');}
 }
 
 /* PLAYER */
 .player {
-  width: 77%;
-  max-width: 350px;
+  width: 80%;
+  max-width: 370px;
   margin: 40px auto;
   padding: 25px;
-  background: rgba(0, 0, 0, 0.001); /* lebih transparan */
+  background: rgba(0, 0, 0, 0.1); /* lebih transparan */
   border-radius: 10px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(1px);
   border: 0.5px solid rgba(255,255,255,0.01);
   text-align: center;
   box-shadow: 0 0 15px rgba(0,255,255,0.01);
@@ -63,9 +59,7 @@ body {
 
 
 /* RADIO NAME */
-h1{font-size:26px;margin-bottom:3px}
-p{opacity:.7;font-size:12px}
-
+h2{font-size:26px;margin-bottom:6px}
 
 /* COVER ART */
 .cover {
@@ -80,12 +74,12 @@ p{opacity:.7;font-size:12px}
 }
 
 #title {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   margin-top: 10px;
 }
 #artist {
-  font-size: 15px;
+  font-size: 10px;
   opacity: 0.85;
   margin-bottom: 20px;
 }
@@ -104,7 +98,7 @@ p{opacity:.7;font-size:12px}
   cursor: pointer;
   box-shadow: 0 0 10px light green;
   transition: 0.3s, box-shadow 1s ease;
-}
+}o
 .play-btn i {
   font-size: 30px;
 }
@@ -130,31 +124,72 @@ p{opacity:.7;font-size:12px}
   background: rgba(150,200,255,5);
   box-shadow: 0 0 12px rgba(150,200,255,0.5);
 }
-</style>
-</head>
-<body>
-
-<div class="bg"></div>
-
-<div class="player" id="playerBox">
-  <h1>Muarasipongi</h1>
-  <p>Juneid-Radio</p>
-  
-
-  <div class="cover" id="cover"></div>
+</style></head>
+<body><div class="bg"></div><div class="player" id="playerBox">
+  <h2>Muarasipongi</h2>  <div class="cover" id="cover"></div>
   <div id="title">Memuat...</div>
-  <div id="artist"></div>
-
-  <div class="play-btn" id="playButton">
+  <div id="artist"></div>  <div class="play-btn" id="playButton">
       <i id="playIcon">▶</i>
-  </div>
+  </div>  <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
+</div><audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
 
-  <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
-</div>
-
-<audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
- 
 <script>
+// 100 Background Images (Unsplash placeholders, bebas diganti)
+const bgImages = [
+  "https://source.unsplash.com/random/1920x1080?nature&sig=1",
+  "https://source.unsplash.com/random/1920x1080?nature&sig=2",
+  "https://source.unsplash.com/random/1920x1080?nature&sig=3",
+  "https://source.unsplash.com/random/1920x1080?nature&sig=4",
+  "https://source.unsplash.com/random/1920x1080?nature&sig=5",
+  "https://source.unsplash.com/random/1920x1080?mountain&sig=6",
+  "https://source.unsplash.com/random/1920x1080?mountain&sig=7",
+  "https://source.unsplash.com/random/1920x1080?mountain&sig=8",
+  "https://source.unsplash.com/random/1920x1080?mountain&sig=9",
+  "https://source.unsplash.com/random/1920x1080?mountain&sig=10",
+  "https://source.unsplash.com/random/1920x1080?beach&sig=11",
+  "https://source.unsplash.com/random/1920x1080?beach&sig=12",
+  "https://source.unsplash.com/random/1920x1080?beach&sig=13",
+  "https://source.unsplash.com/random/1920x1080?beach&sig=14",
+  "https://source.unsplash.com/random/1920x1080?beach&sig=15",
+  "https://source.unsplash.com/random/1920x1080?city&sig=16",
+  "https://source.unsplash.com/random/1920x1080?city&sig=17",
+  "https://source.unsplash.com/random/1920x1080?city&sig=18",
+  "https://source.unsplash.com/random/1920x1080?city&sig=19",
+  "https://source.unsplash.com/random/1920x1080?city&sig=20",
+  "https://source.unsplash.com/random/1920x1080?japan&sig=21",
+  "https://source.unsplash.com/random/1920x1080?japan&sig=22",
+  "https://source.unsplash.com/random/1920x1080?japan&sig=23",
+  "https://source.unsplash.com/random/1920x1080?japan&sig=24",
+  "https://source.unsplash.com/random/1920x1080?japan&sig=25",
+  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=26",
+  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=27",
+  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=28",
+  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=29",
+  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=30",
+  "https://source.unsplash.com/random/1920x1080?forest&sig=31",
+  "https://source.unsplash.com/random/1920x1080?forest&sig=32",
+  "https://source.unsplash.com/random/1920x1080?forest&sig=33",
+  "https://source.unsplash.com/random/1920x1080?forest&sig=34",
+  "https://source.unsplash.com/random/1920x1080?forest&sig=35",
+  "https://source.unsplash.com/random/1920x1080?space&sig=36",
+  "https://source.unsplash.com/random/1920x1080?space&sig=37",
+  "https://source.unsplash.com/random/1920x1080?space&sig=38",
+  "https://source.unsplash.com/random/1920x1080?space&sig=39",
+  "https://source.unsplash.com/random/1920x1080?space&sig=40",
+  "https://source.unsplash.com/random/1920x1080?galaxy&sig=41",
+  "https://source.unsplash.com/random/1920x1080?galaxy&sig=42",
+  "https://source.unsplash.com/random/1920x1080?galaxy&sig=43",
+  "https://source.unsplash.com/random/1920x1080?galaxy&sig=44",
+  "https://source.unsplash.com/random/1920x1080?galaxy&sig=45",
+  "https://source.unsplash.com/random/1920x1080?asia&sig=46",
+  "https://source.unsplash.com/random/1920x1080?asia&sig=47",
+  "https://source.unsplash.com/random/1920x1080?asia&sig=48",
+  "https://source.unsplash.com/random/1920x1080?asia&sig=49",
+  "https://source.unsplash.com/random/1920x1080?asia&sig=50",
+  // 50 more placeholders
+  ...Array.from({length: 50}, (_, i) => `https://source.unsplash.com/random/1920x1080?wallpaper&sig=${51+i}`)
+];
+
 const id = "2vygvb37gkeuv";
 const api = `https://zenoplay.zenomedia.com/api/zenofm/nowplaying/${id}`;
 const defaultCover = "https://dpi4fupzvxbqq.cloudfront.net/rfm/uploads/blogo/300/300_1470024235.png";
@@ -225,32 +260,38 @@ function setGlow(color){
 /* UPDATE NOW PLAYING */
 async function updateSong() {
   try {
-    const res = await fetch(api);
+    const res = await fetch(api + "?" + Date.now());
     const data = await res.json();
-    const text = data.title || "Live Stream";
+
+    // Struktur JSON Zeno
+    const text = data?.now_playing?.song || data?.title || "Live Stream";
+
     let artist = "";
-    let title  = text;
+    let title = text;
+
     if (text.includes(" - ")) {
-      artist = text.split(" - ")[0].trim();
-      title  = text.split(" - ")[1].trim();
+      const parts = text.split(" - ");
+      artist = parts[0].trim();
+      title  = parts[1].trim();
     }
-    titleEl.textContent = title;
+
+    titleEl.textContent  = title;
     artistEl.textContent = artist;
+
     const cover = await getCover(artist, title);
-    coverEl.style.backgroundImage = `url("${cover}")`;
+    coverEl.style.backgroundImage = `url('${cover}')`;
+
     extractColor(cover, (color)=> setGlow(color));
+
   } catch(e) {
     titleEl.textContent = "Radio Stream";
-    coverEl.style.backgroundImage = `url("${defaultCover}")`;
-    setGlow("light blue");
+    artistEl.textContent = "";
+    coverEl.style.backgroundImage = `url('${defaultCover}')`;
+    setGlow("#4af");
   }
 }
+
 updateSong();
 setInterval(updateSong, 10000);
-</script>
-</body>
-</html>
-    
-  </body>
-  
+</script></body>
 </html>
