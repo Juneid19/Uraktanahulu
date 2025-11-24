@@ -110,6 +110,16 @@ h2{
   border-radius: 50%;
   background: rgba(150,200,255,1);
 }
+  .credit {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255,255,255,0.6);
+  z-index: 999;
+  pointer-events: none; /* supaya tidak mengganggu klik */
+}
 
 </style>
 </head>
@@ -134,7 +144,8 @@ h2{
   <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
 </div>
 
-<audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
+<audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio> 
+  <div class="credit">prepared by Juneid</div>
 
 <script>
 /* --- BACKGROUND GANTI TANPA KILAT --- */
