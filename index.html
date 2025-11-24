@@ -1,13 +1,11 @@
-<!DOCTYPE html><html lang="en">  <head>
-    <meta charset="UTF-8">
-    <title>iframe tester</title>
-    <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">  </head>  <body>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <title>Muarasipongi</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"><style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
 body {
   margin: 0;
   padding: 0;
@@ -17,49 +15,39 @@ body {
   overflow: hidden;
 }
 
-/* BACKGROUND SLIDESHOW */
-.bg {
+/* --- CROSSFADE BACKGROUND TANPA KILAT --- */
+
+.bgA, .bgB {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background-size: cover;
   background-position: center;
-  animation: slide 45s infinite;
+  transition: opacity 2s ease-in-out;
   z-index: -1;
-  filter: brightness(0.45);
 }
 
-@keyframes slide {
-  0%   { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
-  20%  { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); }
-  30%  { background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&h=1080'); }
-  40%  { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470'); }
-  50%  { background-image: url('https://images.unsplash.com/photo-1433878455169-4698e60005b1?auto=format&fit=crop&w=1920&h=1080'); }
-  60%  { background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&h=1080'); }
-  70%  { background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&h=1080'); }
-  80%  { background-image: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&h=1080'); }
-  90%  { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&h=1080'); }
-  100% { background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1920&h=1080');}
-}
+/* layer awal */
+.bgA { opacity: 1; }
+.bgB { opacity: 0; }
 
-/* PLAYER */
+/* --- PLAYER --- */
 .player {
   width: 80%;
   max-width: 370px;
   margin: 40px auto;
   padding: 25px;
-  background: rgba(0, 0, 0, 0.1); /* lebih transparan */
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   backdrop-filter: blur(1px);
-  border: 0.5px solid rgba(255,255,255,0.01);
   text-align: center;
-  box-shadow: 0 0 15px rgba(0,255,255,0.01);
-  transition: box-shadow 1s ease;
 }
 
-
 /* RADIO NAME */
-h2{font-size:26px;margin-bottom:6px}
+h2{
+  font-size:26px;
+  margin-bottom:6px
+}
 
 /* COVER ART */
 .cover {
@@ -69,8 +57,6 @@ h2{font-size:26px;margin-bottom:6px}
   margin: 0 auto 20px;
   background-size: cover;
   background-position: center;
-  box-shadow: 0 0 20px rgba(255,255,255,0.7);
-  transition: box-shadow 1s ease;
 }
 
 #title {
@@ -78,6 +64,7 @@ h2{font-size:26px;margin-bottom:6px}
   font-weight: bold;
   margin-top: 10px;
 }
+
 #artist {
   font-size: 10px;
   opacity: 0.85;
@@ -91,29 +78,29 @@ h2{font-size:26px;margin-bottom:6px}
   border-radius: 50%;
   margin: 10px auto 20px;
   background: rgba(4,255,255,0.7);
-  border: 2px solid light blue;
+  border: 2px solid lightblue;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 0 10px light green;
-  transition: 0.3s, box-shadow 1s ease;
-}o
+  transition: 0.3s;
+}
+
 .play-btn i {
   font-size: 30px;
 }
+
 .play-btn:hover {
   transform: scale(1.08);
 }
 
-/* VOLUME SLIDER – SOFT BLUE */
+/* VOLUME */
 .volume {
   -webkit-appearance: none;
   width: 90%;
   height: 7px;
-  background: rgba(180,220,255,7);
+  background: rgba(180,220,255,0.7);
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(150,200,255,0.5);
   cursor: pointer;
 }
 .volume::-webkit-slider-thumb {
@@ -121,99 +108,86 @@ h2{font-size:26px;margin-bottom:6px}
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(150,200,255,5);
-  box-shadow: 0 0 12px rgba(150,200,255,0.5);
+  background: rgba(150,200,255,1);
 }
-.credit {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  font-size: 12px;
-  font-style: italic;
-  color: rgba(255,255,255,0.6);
-  z-index: 999;
-  pointer-events: none; /* supaya tidak mengganggu klik */
-}
-    
-</style></head>
-<body><div class="bg"></div><div class="player" id="playerBox">
-  <h2>Muarasipongi</h2>  <div class="cover" id="cover"></div>
+
+</style>
+</head>
+
+<body>
+
+<!-- dua layer background -->
+<div class="bgA" id="bgA"></div>
+<div class="bgB" id="bgB"></div>
+
+<div class="player" id="playerBox">
+  <h2>Muarasipongi</h2>
+
+  <div class="cover" id="cover"></div>
   <div id="title">Memuat...</div>
-  <div id="artist"></div>  <div class="play-btn" id="playButton">
+  <div id="artist"></div>
+
+  <div class="play-btn" id="playButton">
       <i id="playIcon">▶</i>
-  </div>  <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
-</div><audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
-<div class="credit">prepare by Juneid</div>
-    
+  </div>
+
+  <input type="range" min="0" max="100" value="70" class="volume" id="volumeSlider">
+</div>
+
+<audio id="radio" src="https://stream.zeno.fm/2vygvb37gkeuv"></audio>
+
 <script>
-// 100 Background Images (Unsplash placeholders, bebas diganti)
-const bgImages = [
-  "https://source.unsplash.com/random/1920x1080?nature&sig=1",
-  "https://source.unsplash.com/random/1920x1080?nature&sig=2",
-  "https://source.unsplash.com/random/1920x1080?nature&sig=3",
-  "https://source.unsplash.com/random/1920x1080?nature&sig=4",
-  "https://source.unsplash.com/random/1920x1080?nature&sig=5",
-  "https://source.unsplash.com/random/1920x1080?mountain&sig=6",
-  "https://source.unsplash.com/random/1920x1080?mountain&sig=7",
-  "https://source.unsplash.com/random/1920x1080?mountain&sig=8",
-  "https://source.unsplash.com/random/1920x1080?mountain&sig=9",
-  "https://source.unsplash.com/random/1920x1080?mountain&sig=10",
-  "https://source.unsplash.com/random/1920x1080?beach&sig=11",
-  "https://source.unsplash.com/random/1920x1080?beach&sig=12",
-  "https://source.unsplash.com/random/1920x1080?beach&sig=13",
-  "https://source.unsplash.com/random/1920x1080?beach&sig=14",
-  "https://source.unsplash.com/random/1920x1080?beach&sig=15",
-  "https://source.unsplash.com/random/1920x1080?city&sig=16",
-  "https://source.unsplash.com/random/1920x1080?city&sig=17",
-  "https://source.unsplash.com/random/1920x1080?city&sig=18",
-  "https://source.unsplash.com/random/1920x1080?city&sig=19",
-  "https://source.unsplash.com/random/1920x1080?city&sig=20",
-  "https://source.unsplash.com/random/1920x1080?japan&sig=21",
-  "https://source.unsplash.com/random/1920x1080?japan&sig=22",
-  "https://source.unsplash.com/random/1920x1080?japan&sig=23",
-  "https://source.unsplash.com/random/1920x1080?japan&sig=24",
-  "https://source.unsplash.com/random/1920x1080?japan&sig=25",
-  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=26",
-  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=27",
-  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=28",
-  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=29",
-  "https://source.unsplash.com/random/1920x1080?cyberpunk&sig=30",
-  "https://source.unsplash.com/random/1920x1080?forest&sig=31",
-  "https://source.unsplash.com/random/1920x1080?forest&sig=32",
-  "https://source.unsplash.com/random/1920x1080?forest&sig=33",
-  "https://source.unsplash.com/random/1920x1080?forest&sig=34",
-  "https://source.unsplash.com/random/1920x1080?forest&sig=35",
-  "https://source.unsplash.com/random/1920x1080?space&sig=36",
-  "https://source.unsplash.com/random/1920x1080?space&sig=37",
-  "https://source.unsplash.com/random/1920x1080?space&sig=38",
-  "https://source.unsplash.com/random/1920x1080?space&sig=39",
-  "https://source.unsplash.com/random/1920x1080?space&sig=40",
-  "https://source.unsplash.com/random/1920x1080?galaxy&sig=41",
-  "https://source.unsplash.com/random/1920x1080?galaxy&sig=42",
-  "https://source.unsplash.com/random/1920x1080?galaxy&sig=43",
-  "https://source.unsplash.com/random/1920x1080?galaxy&sig=44",
-  "https://source.unsplash.com/random/1920x1080?galaxy&sig=45",
-  "https://source.unsplash.com/random/1920x1080?asia&sig=46",
-  "https://source.unsplash.com/random/1920x1080?asia&sig=47",
-  "https://source.unsplash.com/random/1920x1080?asia&sig=48",
-  "https://source.unsplash.com/random/1920x1080?asia&sig=49",
-  "https://source.unsplash.com/random/1920x1080?asia&sig=50",
-  // 50 more placeholders
-  ...Array.from({length: 50}, (_, i) => `https://source.unsplash.com/random/1920x1080?wallpaper&sig=${51+i}`)
+/* --- BACKGROUND GANTI TANPA KILAT --- */
+const images = [
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&h=1080",
+  "https://images.unsplash.com/photo-1433878455169-4698e60005b1?auto=format&fit=crop&w=1920&h=1080",
+  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&h=1080",
+  "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1920&h=1080",
+  "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&h=1080",
+  "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1920&h=1080"
 ];
+
+let index = 0;
+let active = true;
+const bgA = document.getElementById("bgA");
+const bgB = document.getElementById("bgB");
+
+function nextBg() {
+  index = (index + 1) % images.length;
+
+  if (active) {
+    bgB.style.backgroundImage = `url(${images[index]})`;
+    bgA.style.opacity = 0;
+    bgB.style.opacity = 1;
+  } else {
+    bgA.style.backgroundImage = `url(${images[index]})`;
+    bgA.style.opacity = 1;
+    bgB.style.opacity = 0;
+  }
+
+  active = !active;
+}
+
+nextBg();
+setInterval(nextBg, 20000);
+
+
+/* --- PLAYER SCRIPT TETAP SAMA --- */
 
 const id = "2vygvb37gkeuv";
 const api = `https://zenoplay.zenomedia.com/api/zenofm/nowplaying/${id}`;
 const defaultCover = "https://dpi4fupzvxbqq.cloudfront.net/rfm/uploads/blogo/300/300_1470024235.png";
-const audio       = document.getElementById("radio");
-const titleEl     = document.getElementById("title");
-const artistEl    = document.getElementById("artist");
-const coverEl     = document.getElementById("cover");
-const playBtn     = document.getElementById("playButton");
-const playIcon    = document.getElementById("playIcon");
-const volumeSlider = document.getElementById("volumeSlider");
-const playerBox    = document.getElementById("playerBox");
-/* PLAY / PAUSE */
+
+const audio = document.getElementById("radio");
+const titleEl = document.getElementById("title");
+const artistEl = document.getElementById("artist");
+const coverEl = document.getElementById("cover");
+const playBtn = document.getElementById("playButton");
+const playIcon = document.getElementById("playIcon");
+
+/* PLAY/PAUSE */
 playBtn.onclick = () => {
   if (audio.paused) {
     audio.play();
@@ -223,87 +197,55 @@ playBtn.onclick = () => {
     playIcon.textContent = "▶";
   }
 };
-/* Volume */
-volumeSlider.oninput = () => {
-  audio.volume = volumeSlider.value / 100;
+
+/* VOLUME */
+document.getElementById("volumeSlider").oninput = function() {
+  audio.volume = this.value / 100;
 };
-/* Extract dominant color */
-function extractColor(url, callback){
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  img.src = url;
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img,0,0);
-    const d = ctx.getImageData(0,0,canvas.width,canvas.height).data;
-    let r=0,g=0,b=0,count=0;
-    for(let i=0;i<d.length;i+=4){
-      r+=d[i]; g+=d[i+1]; b+=d[i+2];
-      count++;
-    }
-    r=Math.floor(r/count);
-    g=Math.floor(g/count);
-    b=Math.floor(b/count);
-    callback(`rgb(${r},${g},${b})`);
-  };
-}
+
 /* COVER ART ITUNES */
 async function getCover(artist, title) {
   try {
     const q = encodeURIComponent(`${artist} ${title}`);
     const res = await fetch(`https://itunes.apple.com/search?term=${q}&entity=song&limit=1`);
-    const data = await
-    res.json();
+    const data = await res.json();
     if (data.results.length > 0) {
       return data.results[0].artworkUrl100.replace("100x100bb.jpg","600x600bb.jpg");
     }
   } catch {}
   return defaultCover;
 }
-/* UPDATE GLOW */
-function setGlow(color){
-  playerBox.style.boxShadow = `0 0 30px 10px ${color}`;
-  coverEl.style.boxShadow   = `0 0 25px ${color}`;
-  playBtn.style.boxShadow   = `0 0 25px ${color}`;
-}
+
 /* UPDATE NOW PLAYING */
 async function updateSong() {
   try {
-    const res = await fetch(api + "?" + Date.now());
+    const res = await fetch(api);
     const data = await res.json();
-
-    // Struktur JSON Zeno
-    const text = data?.now_playing?.song || data?.title || "Live Stream";
+    const text = data.title || "Live Stream";
 
     let artist = "";
     let title = text;
 
     if (text.includes(" - ")) {
-      const parts = text.split(" - ");
-      artist = parts[0].trim();
-      title  = parts[1].trim();
+      artist = text.split(" - ")[0].trim();
+      title = text.split(" - ")[1].trim();
     }
 
-    titleEl.textContent  = title;
+    titleEl.textContent = title;
     artistEl.textContent = artist;
 
     const cover = await getCover(artist, title);
-    coverEl.style.backgroundImage = `url('${cover}')`;
-
-    extractColor(cover, (color)=> setGlow(color));
+    coverEl.style.backgroundImage = `url("${cover}")`;
 
   } catch(e) {
     titleEl.textContent = "Radio Stream";
-    artistEl.textContent = "";
-    coverEl.style.backgroundImage = `url('${defaultCover}')`;
-    setGlow("#4af");
+    coverEl.style.backgroundImage = `url("${defaultCover}")`;
   }
 }
 
 updateSong();
 setInterval(updateSong, 10000);
-</script></body>
+</script>
+
+</body>
 </html>
